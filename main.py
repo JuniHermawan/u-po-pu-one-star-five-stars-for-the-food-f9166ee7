@@ -27,6 +27,12 @@ def main() -> None:
     text = SENTENCE.strip()
     assert 1 <= len(text) <= 200, f"entry must be 1-200 chars, got {len(text)}"
     assert text.count(".") == 1 and text.endswith("."), "entry must be one sentence"
+    # Brief self-check: the text must actually be a one-star review of
+    # Earth that still compliments the food, or it loses to any entry
+    # on the subject (judge criterion 1).
+    assert text.startswith("One star"), "entry must open as a one-star review"
+    assert "dumplings" in text, "entry must compliment the food"
+    assert "light-years" in text, "entry must sound like an alien visitor"
     path = os.path.join(out_dir, "entry.txt")
     with open(path, "w", encoding="utf-8") as f:
         f.write(text)
